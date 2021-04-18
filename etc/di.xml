@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Framework\Console\CommandList">
+		<arguments>
+			<argument name="commands" xsi:type="array">
+				<item name="Import" xsi:type="object">Im\NovaPoshta\Console\Command\Import</item>
+			</argument>
+		</arguments>
+	</type>
+	<preference for="Im\NovaPoshta\Api\ShippingInfoRepositoryInterface" type="Im\NovaPoshta\Model\ShippingInfoRepository"/>
+	<preference for="Im\NovaPoshta\Api\Data\ShippingInfoInterface" type="Im\NovaPoshta\Model\Data\ShippingInfo"/>
+	<preference for="Im\NovaPoshta\Api\Data\ShippingInfoSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>
