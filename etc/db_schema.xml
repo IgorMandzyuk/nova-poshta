@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-	<table name="im_novaposhta_shippinginfo" resource="default" engine="innodb" comment="im_novaposhta_shippinginfo Table">
-		<column xsi:type="smallint" name="shippinginfo_id" padding="6" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+<!--	<table name="im_novaposhta_shippinginfo" resource="default" engine="innodb" comment="im_novaposhta_shippinginfo Table">
+		<column xsi:type="smallint" name="id" padding="6" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
 		<constraint xsi:type="primary" referenceId="PRIMARY">
-			<column name="shippinginfo_id"/>
+			<column name="id"/>
 		</constraint>
 		<column name="content" nullable="true" xsi:type="text" comment="content"/>
-	</table>
+	</table>-->
 </schema>

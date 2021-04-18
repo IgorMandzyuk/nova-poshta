@@ -18,7 +18,7 @@ class ShippingInfo extends \Magento\Framework\Model\AbstractModel
 
     protected $dataObjectHelper;
 
-    protected $_eventPrefix = 'im_novaposhta_shippinginfo';
+    protected $_eventPrefix = 'im_novaposhta_shipping';
 
     /**
      * @param \Magento\Framework\Model\Context $context
@@ -50,15 +50,16 @@ class ShippingInfo extends \Magento\Framework\Model\AbstractModel
     public function getDataModel()
     {
         $shippinginfoData = $this->getData();
-        
+
         $shippinginfoDataObject = $this->shippinginfoDataFactory->create();
         $this->dataObjectHelper->populateWithArray(
             $shippinginfoDataObject,
             $shippinginfoData,
             ShippingInfoInterface::class
         );
-        
+
         return $shippinginfoDataObject;
     }
+
 }
 

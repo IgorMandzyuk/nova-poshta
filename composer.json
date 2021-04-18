@@ -9,7 +9,6 @@
             "email": "info@mage2gen.com"
         }
     ],
-    "minimum-stability": "dev",
     "version": "1.0.0",
     "require": {
         "lis-dev/nova-poshta-api-2": "~0.1.0"

@@ -7,6 +7,9 @@
 			</argument>
 		</arguments>
 	</type>
+    <type name="Magento\Config\Model\Config">
+        <plugin name="admin_system_config_save_plugin" type="Im\NovaPoshta\Plugin\ConfigPlugin" sortOrder="1"/>
+    </type>
 	<preference for="Im\NovaPoshta\Api\ShippingInfoRepositoryInterface" type="Im\NovaPoshta\Model\ShippingInfoRepository"/>
 	<preference for="Im\NovaPoshta\Api\Data\ShippingInfoInterface" type="Im\NovaPoshta\Model\Data\ShippingInfo"/>
 	<preference for="Im\NovaPoshta\Api\Data\ShippingInfoSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>

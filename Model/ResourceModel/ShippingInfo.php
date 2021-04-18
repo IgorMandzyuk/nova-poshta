@@ -17,7 +17,7 @@ class ShippingInfo extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('im_novaposhta_shippinginfo', 'shippinginfo_id');
+        $this->_init('im_novaposhta_shipping', 'id');
     }
 }
 
