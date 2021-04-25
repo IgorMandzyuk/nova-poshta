@@ -2,15 +2,15 @@
 
 namespace Im\NovaPoshta\Controller\Adminhtml\Index;
 
+use Im\NovaPoshta\Model\Generator;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Magento\Backend\App\Action;
 
 /**
  * Class Index
  * @package Im\NovaPoshta\Controller\Adminhtml\Index\Index
  */
-class Index extends Action
+class Index extends  \Magento\Backend\App\Action
 {
 
 
@@ -20,14 +20,21 @@ class Index extends Action
      */
     protected $resultPageFactory;
 
+    private  $generator;
+
     /**
      * Index constructor.
      * @param Context $context
      * @param PageFactory $resultPageFactory
      */
-    public function __construct(Context $context, PageFactory $resultPageFactory)
+    public function __construct(
+        Context $context,
+        PageFactory $resultPageFactory,
+        Generator $generator
+    )
     {
         $this->resultPageFactory = $resultPageFactory;
+        $this->generator = $generator;
         return parent::__construct($context);
     }
 
@@ -37,6 +44,7 @@ class Index extends Action
      */
     public function execute()
     {
+        $this->generator->generateParcel();
         return $this->resultPageFactory->create();
     }
 }

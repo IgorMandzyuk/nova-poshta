@@ -9,6 +9,7 @@ namespace Im\NovaPoshta\Model;
 
 use LisDev\Delivery\NovaPoshtaApi2;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 
 class Config extends \Magento\Framework\Model\AbstractModel
 {
@@ -26,6 +27,16 @@ class Config extends \Magento\Framework\Model\AbstractModel
      *
      */
     const XML_PATH_EXTENSION_CARRIER_TITLE = 'carriers/novaposhta/title';
+
+    /**
+     *
+     */
+    const XML_PATH_EXTENSION_SENDER_CITY = 'carriers/novaposhta/sender_city';
+
+    /**
+     *
+     */
+    const XML_PATH_EXTENSION_PLUGIN_LOCALE = 'carriers/novaposhta/content_language';
 
     protected $_eventPrefix = 'im_novaposhta_shipping';
 
@@ -65,16 +76,15 @@ class Config extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * @param $api_key
-     * @return false|NovaPoshtaApi2
+     * @return NovaPoshtaApi2|string
      */
-    public function getConnection($api_key)
+    public function getConnection()
     {
-        $np = false;
-        if (!empty($api_key)) {
+        $api_key = $this->getApiKeyValue();
+        if ($api_key) {
             $np = new NovaPoshtaApi2(
                 $api_key,
-                'ru', // Язык возвращаемых данных: ru (default) | ua | en
+                $this->getLocale(), // Язык возвращаемых данных: ru (default) | ua | en
                 false, // При ошибке в запросе выбрасывать Exception: FALSE (default) | TRUE
                 'curl' // Используемый механизм запроса: curl (defalut) | file_get_content
             );
@@ -90,7 +100,7 @@ class Config extends \Magento\Framework\Model\AbstractModel
     {
         return (string)$this->scopeConfig->getValue(
             self::XML_PATH_EXTENSION_API_KEY,
-            $storeId
+            ScopeInterface::SCOPE_STORE
         );
     }
 
@@ -100,9 +110,30 @@ class Config extends \Magento\Framework\Model\AbstractModel
      */
     protected function getCarrierTitle($storeId = null)
     {
-        return $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::XML_PATH_EXTENSION_CARRIER_TITLE,
-            $storeId
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    protected function getCities()
+    {
+        return $this->getConnection()->getCities();
+    }
+
+    public function getSenderCity($storeId = null)
+    {
+        return (string)$this->scopeConfig->getValue(
+            self::XML_PATH_EXTENSION_SENDER_CITY,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getLocale()
+    {
+        return (string)$this->scopeConfig->getValue(
+            self::XML_PATH_EXTENSION_PLUGIN_LOCALE,
+            ScopeInterface::SCOPE_STORE
         );
     }
 }

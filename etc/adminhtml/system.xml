@@ -15,6 +15,10 @@
                     <label>Language of content</label>
                     <source_model>Im\NovaPoshta\Model\ContentLanguage</source_model>
                 </field>
+                <field id="generate_pre_waybill" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Generate waybill at place order</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
 				<field id="price" type="text" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Price</label>
 					<validate>validate-number validate-zero-or-greater</validate>
@@ -25,6 +29,16 @@
 				<field id="title" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Title</label>
 				</field>
+                <field id="sender_name" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Sender Name</label>
+                </field>
+                <field id="sender_sur_name" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Sender Sur Name</label>
+                </field>
+                <field id="sender_city" type="select" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Sender Place</label>
+                    <source_model>Im\NovaPoshta\Model\Cities</source_model>
+                </field>
 			</group>
 		</section>
 <!--		<tab id="im" translate="label" sortOrder="999">-->
