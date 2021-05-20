@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Im\NovaPoshta\Model\Carrier;
 
+use Im\NovaPoshta\Model\Config;
 use Magento\Quote\Model\Quote\Address\RateRequest;
-use Magento\Shipping\Model\Rate\Result;
 
 class NovaPoshta extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
@@ -16,11 +16,16 @@ class NovaPoshta extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
     protected $_code = 'novaposhta';
 
+    protected $_code2 = 'novaposhtaa';
+
+
     protected $_isFixed = true;
 
     protected $_rateResultFactory;
 
     protected $_rateMethodFactory;
+
+    private  $config;
 
     /**
      * Constructor
@@ -38,10 +43,12 @@ class NovaPoshta extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         \Psr\Log\LoggerInterface $logger,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
+        \im\NovaPoshta\Model\Config $config,
         array $data = []
     ) {
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
+        $this->config = $config;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -50,32 +57,37 @@ class NovaPoshta extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      */
     public function collectRates(RateRequest $request)
     {
-        if (!$this->getConfigFlag('active')) {
-            return false;
-        }
-
         $shippingPrice = $this->getConfigData('price');
-
         $result = $this->_rateResultFactory->create();
+        $deliveryType = $this->config->getDeliveryType();
+        $method = $this->_rateMethodFactory->create();
+        $method2 = $this->_rateMethodFactory->create();
 
-        if ($shippingPrice !== false) {
-            $method = $this->_rateMethodFactory->create();
+        if ('office' == $deliveryType) {
 
             $method->setCarrier($this->_code);
             $method->setCarrierTitle($this->getConfigData('title'));
+            $method2->setMethod($this->_code2);
+            $method2->setMethodTitle('ssss');
+            $result->append($method);
+
+
+        }elseif ('sklad' == $deliveryType) {
 
             $method->setMethod($this->_code);
             $method->setMethodTitle($this->getConfigData('name'));
+            $method2->setMethod($this->_code2);
+            $method2->setMethodTitle('ssss');
+            $result->append($method2);
 
-            if ($request->getFreeShipping() === true) {
-                $shippingPrice = '0.00';
-            }
-
-            $method->setPrice($shippingPrice);
-            $method->setCost($shippingPrice);
-
-            $result->append($method);
         }
+
+/*        if (!$this->getConfigFlag('active')) {
+            return false;
+        }*/
+
+            $method->setPrice('100000');
+            $method->setCost('10000000');
 
         return $result;
     }
@@ -87,6 +99,6 @@ class NovaPoshta extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      */
     public function getAllowedMethods()
     {
-        return [$this->_code => $this->getConfigData('name')];
+        return [$this->_code => $this->getConfigData('name'), $this->_code2 => $this->getConfigData('name')];
     }
 }

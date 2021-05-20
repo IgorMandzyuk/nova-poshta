@@ -29,32 +29,19 @@
 				<field id="title" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Title</label>
 				</field>
-                <field id="sender_name" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
-                    <label>Sender Name</label>
-                </field>
-                <field id="sender_sur_name" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
-                    <label>Sender Sur Name</label>
+                <field id="delivery_type"  type="multiselect" sortOrder="50"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delivery Type</label>
+                    <source_model>Im\NovaPoshta\Model\Config\DeliveryType</source_model>
                 </field>
                 <field id="sender_city" type="select" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                     <label>Sender Place</label>
                     <source_model>Im\NovaPoshta\Model\Cities</source_model>
                 </field>
+                <field id="shipping_price_option" type="select" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Shipping price option</label>
+                    <source_model>Im\NovaPoshta\Model\Price</source_model>
+                </field>
 			</group>
 		</section>
-<!--		<tab id="im" translate="label" sortOrder="999">-->
-<!--			<label>im</label>-->
-<!--		</tab>-->
-<!--		<section id="settings" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">-->
-<!--			<label>settings</label>-->
-<!--			<tab>im</tab>-->
-<!--			<resource>Im_NovaPoshta::config_im_novaposhta</resource>-->
-<!--			<group id="im_novaposhta" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">-->
-<!--				<label>im_novaposhta</label>-->
-<!--				<field id="api_key" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">-->
-<!--					<label>api_key</label>-->
-<!--					<comment/>-->
-<!--				</field>-->
-<!--			</group>-->
-<!--		</section>-->
 	</system>
 </config>

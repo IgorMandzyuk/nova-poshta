@@ -31,13 +31,8 @@ class OrderPlaceAfter implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $this->generator->generateParcel();
-       // $order = $observer->getEvent()->getOrder();
-/*        foreach ($order->getAllItems() as $item) {
-            $item->getQtyOrdered();
-            var_dump($item);
-            die();
-        }*/
+        $items = $observer->getEvent()->getOrder();
+        $this->generator->generateParcel($items);
         return $observer;
     }
 }

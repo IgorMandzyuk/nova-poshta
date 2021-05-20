@@ -14,7 +14,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
-class AddHeightProductAttribute implements DataPatchInterface, PatchRevertableInterface
+class AddImNovaPoshtaLengthProductAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 
     /**
@@ -50,17 +50,17 @@ class AddHeightProductAttribute implements DataPatchInterface, PatchRevertableIn
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
-            'height',
+            'im_nova_poshta_length',
             [
-                'type' => 'varchar',
-                'label' => 'Height',
+                'type' => 'int',
+                'label' => 'im_nova_poshta_length',
                 'input' => 'text',
                 'source' => '',
                 'frontend' => '',
                 'required' => false,
                 'backend' => '',
                 'sort_order' => '30',
-                'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                'global' => ScopedAttributeInterface::SCOPE_STORE,
                 'default' => null,
                 'visible' => true,
                 'user_defined' => true,
@@ -87,7 +87,7 @@ class AddHeightProductAttribute implements DataPatchInterface, PatchRevertableIn
         $this->moduleDataSetup->getConnection()->startSetup();
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
-        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'height');
+        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'im_nova_poshta_length');
 
         $this->moduleDataSetup->getConnection()->endSetup();
     }

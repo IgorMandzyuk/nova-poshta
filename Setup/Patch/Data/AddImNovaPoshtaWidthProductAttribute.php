@@ -14,7 +14,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
-class AddWidthProductAttribute implements DataPatchInterface, PatchRevertableInterface
+class AddImNovaPoshtaWidthProductAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 
     /**
@@ -50,17 +50,17 @@ class AddWidthProductAttribute implements DataPatchInterface, PatchRevertableInt
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
-            'width',
+            'im_nova_poshta_width',
             [
-                'type' => 'varchar',
-                'label' => 'Width',
+                'type' => 'int',
+                'label' => 'im_nova_poshta_width',
                 'input' => 'text',
                 'source' => '',
                 'frontend' => '',
                 'required' => false,
                 'backend' => '',
                 'sort_order' => '30',
-                'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                'global' => ScopedAttributeInterface::SCOPE_STORE,
                 'default' => null,
                 'visible' => true,
                 'user_defined' => true,
@@ -87,7 +87,7 @@ class AddWidthProductAttribute implements DataPatchInterface, PatchRevertableInt
         $this->moduleDataSetup->getConnection()->startSetup();
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
-        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'width');
+        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'im_nova_poshta_width');
 
         $this->moduleDataSetup->getConnection()->endSetup();
     }

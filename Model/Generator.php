@@ -40,8 +40,13 @@ class Generator extends \Magento\Framework\Model\AbstractModel
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
-    public function generateParcel()
+    public function generateParcel($items)
     {
+        if ($this->config->getDeliveryType()){
+
+        }
+        var_dump('aaa');
+        var_dump($items->getData()); die();
         $np = $this->config->getConnection();
         $senderInfo = $np->getCounterparties('Sender', 1, '', '');
         $sender = $senderInfo['data'][0];

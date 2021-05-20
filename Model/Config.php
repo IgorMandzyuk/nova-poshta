@@ -38,6 +38,11 @@ class Config extends \Magento\Framework\Model\AbstractModel
      */
     const XML_PATH_EXTENSION_PLUGIN_LOCALE = 'carriers/novaposhta/content_language';
 
+    /**
+     *
+     */
+    const XML_PATH_EXTENSION_DELIVERY_TYPE = 'carriers/novaposhta/delivery_type';
+
     protected $_eventPrefix = 'im_novaposhta_shipping';
 
     private ScopeConfigInterface $scopeConfig;
@@ -136,4 +141,13 @@ class Config extends \Magento\Framework\Model\AbstractModel
             ScopeInterface::SCOPE_STORE
         );
     }
+
+    public function getDeliveryType()
+    {
+        return (string)$this->scopeConfig->getValue(
+            self::XML_PATH_EXTENSION_DELIVERY_TYPE,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
 }
