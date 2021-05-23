@@ -60,34 +60,32 @@ class NovaPoshta extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         $shippingPrice = $this->getConfigData('price');
         $result = $this->_rateResultFactory->create();
         $deliveryType = $this->config->getDeliveryType();
-        $method = $this->_rateMethodFactory->create();
-        $method2 = $this->_rateMethodFactory->create();
+        $methodOffice = $this->_rateMethodFactory->create();
+        $methodSkald = $this->_rateMethodFactory->create();
 
         if ('office' == $deliveryType) {
 
-            $method->setCarrier($this->_code);
-            $method->setCarrierTitle($this->getConfigData('title'));
-            $method2->setMethod($this->_code2);
-            $method2->setMethodTitle('ssss');
-            $result->append($method);
-
+            $methodOffice->setCarrier($this->_code);
+            $methodOffice->setCarrierTitle($this->getConfigData('title'));
+            $methodOffice->setMethod($this->_code2);
+            $methodOffice->setMethodTitle('ssss');
+            $result->append($methodOffice);
 
         }elseif ('sklad' == $deliveryType) {
 
-            $method->setMethod($this->_code);
-            $method->setMethodTitle($this->getConfigData('name'));
-            $method2->setMethod($this->_code2);
-            $method2->setMethodTitle('ssss');
-            $result->append($method2);
-
+            $methodSkald->setMethod($this->_code);
+            $methodSkald->setMethodTitle($this->getConfigData('name'));
+            $methodSkald->setMethod($this->_code2);
+            $methodSkald->setMethodTitle('ssss');
+            $result->append($methodSkald);
         }
 
 /*        if (!$this->getConfigFlag('active')) {
             return false;
         }*/
 
-            $method->setPrice('100000');
-            $method->setCost('10000000');
+         //   $method->setPrice('100000');
+         //   $method->setCost('10000000');
 
         return $result;
     }
