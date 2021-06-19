@@ -11,7 +11,10 @@
     ],
     "version": "1.0.0",
     "require": {
-        "lis-dev/nova-poshta-api-2": "~0.1.0"
+        "lis-dev/nova-poshta-api-2": "~0.1.0",
+        "botman/botman": "^2.6",
+        "botman/driver-web": "^1.5"
+        
     },
     "minimum-stability": "dev",
     "autoload": {
